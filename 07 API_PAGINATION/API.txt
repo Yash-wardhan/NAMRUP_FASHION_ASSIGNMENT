@@ -1,0 +1,26 @@
+Question
+    Scenario: You need to implement pagination for an endpoint that returns a list of products. The endpoint should support pagination using limit and offset query parameters.
+    Requirements:
+    Write a brief description of how you would implement pagination in a Node.js REST API.
+    Explain how you would handle large data sets and ensure that pagination is efficient.
+
+Solution:
+
+Implementation in Node.js: Pagination can be achieved using limit and offset query parameters to fetch specific chunks of data.
+
+Example:
+
+javascript
+Copy code
+app.get('/products', async (req, res) => {
+  const limit = parseInt(req.query.limit, 10) || 10;
+  const offset = parseInt(req.query.offset, 10) || 0;
+  
+  const products = await Product.find().limit(limit).skip(offset);
+  
+  res.json(products);
+});
+Handling Large Data Sets:
+
+Use indexes on columns frequently involved in filtering or sorting.
+Consider using cursor-based pagination instead of limit-offset for very large datasets.

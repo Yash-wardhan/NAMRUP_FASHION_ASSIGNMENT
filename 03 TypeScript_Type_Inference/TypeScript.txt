@@ -1,0 +1,23 @@
+Question
+    Scenario: Consider the following TypeScript function:
+
+    
+    What TypeScript feature is being used to specify the return type of the getUserInfo function?
+    How would you modify this function to handle cases where the API response might be missing the age property.
+
+Solution:
+
+Explanation:
+
+TypeScript uses type inference to automatically determine the return type of the function based on the object being returned. In this case, the return type is inferred as { name: string, age: number | string }.
+Modification: To handle cases where the age property might be missing, the function already uses a fallback ('Unknown'). No changes are needed for this case, but adding stricter typing for API responses can help:
+
+function getUserInfo(userId: number): Promise<{ name: string; age?: number }> {
+  return fetch(`/api/users/${userId}`)
+    .then(response => response.json())
+    .then(data => ({
+      name: data.name,
+      age: data.age !== undefined ? data.age : 'Unknown' // Handle missing age
+    }));
+}
+

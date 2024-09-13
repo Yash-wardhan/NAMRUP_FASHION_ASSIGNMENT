@@ -1,0 +1,49 @@
+Question
+
+    Scenario: You have the following Node.js function that processes a user login request:
+
+
+    How would you improve the error handling in this function to provide more specific error responses to the client?
+    Explain the importance of differentiating between different types of errors (e.g., user not found vs. invalid password).
+
+Solution:
+
+Code 
+'''
+async function loginUser(email, password) {
+  try {
+    const user = await findUserByEmail(email);
+
+    if (!user) {
+      return {
+        status: 404,
+        error: 'User not found',
+      };
+    }
+
+    const isPasswordValid = await verifyPassword(user, password);
+
+    if (!isPasswordValid) {
+      return {
+        status: 401,
+        error: 'Invalid password',
+      };
+    }
+
+    return {
+      status: 200,
+      success: true,
+      user,
+    };
+  } catch (error) {
+    return {
+      status: 500,
+      error: 'Internal server error',
+    };
+  }
+}
+'''
+
+The importance of differentiating between different types of errors lies in providing more specific and helpful error messages to
+the client. This allows the client to understand the nature of the error and take appropriate action to resolve
+it.

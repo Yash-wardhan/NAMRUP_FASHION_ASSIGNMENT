@@ -1,0 +1,36 @@
+Question
+    Scenario: You are tasked with implementing rate limiting for a REST API endpoint to prevent abuse. The rate limit should be applied per IP address.
+    Requirements:
+    Describe a basic approach to implement rate limiting in a Node.js application.
+    What libraries or strategies would you use to handle rate limiting?
+
+Solution
+    To implement rate limiting in a Node.js application, we can use a combination of libraries and strategies
+        1.  **Redis**: We can use Redis as a store to keep track of the number of
+        requests made by each IP address within a certain time window. This will allow us to easily increment
+        and decrement the request count for each IP address.
+
+        2.  **Limiter**: We can use a library like `limiter` to handle rate
+        limiting. This library provides a simple way to limit the number of requests made to an endpoint within
+        a certain time window.
+
+        3.  **Express**: We can use Express.js as our web framework to handle HTTP requests and
+        responses.
+
+        4.  **Rate Limiting Algorithm**: We can use a rate limiting algorithm like the Leaky
+        Bucket algorithm to handle rate limiting. This algorithm is simple to implement and provides a good
+        balance between fairness and efficiency.
+
+
+    Code
+
+    const rateLimit = require('express-rate-limit');
+
+        const limiter = rateLimit({
+        windowMs: 1 * 60 * 1000, // 1 minute
+        max: 100, // Limit each IP to 100 requests per windowMs
+        message: "Too many requests, please try again later."
+        });
+
+        app.use('/api/', limiter);
+

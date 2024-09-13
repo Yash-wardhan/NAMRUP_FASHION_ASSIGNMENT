@@ -1,0 +1,25 @@
+Question
+    Scenario: You need to design a REST API endpoint to retrieve user profile information. The endpoint should support fetching a user's profile by their username and include optional query parameters for filtering the results.
+    Requirements:
+    Define the endpoint URL and HTTP method.
+    Specify the expected request parameters and response structure.
+    Explain how you would handle errors (e.g., user not found) and validate input.
+
+
+Solution
+
+Define the endpoint URL and HTTP method
+--------------------------------­---
+The endpoint URL for retrieving a user's profile information is `/users/{username}`. The HTTP method
+for this endpoint is `GET`.
+
+Explain how you would handle errors (e.g., user not found) and validate input.
+------------------------------------------------­---
+To handle errors and validate input, we can use the following strategies:
+1.  **Error Handling**: Implement a try-catch block to catch any exceptions that may occur
+during the execution of the endpoint. For example, if the user is not found, a `
+404 Not Found` error can be raised.
+2.  **Input Validation**: Validate the input parameters to ensure they are in the correct format and
+within the expected range. For instance, the `username` parameter should be a string and not empty
+3.  **Optional Query Parameters**: Use query parameters to filter the results. For example, we
+can use `?active=true` to retrieve only active users.

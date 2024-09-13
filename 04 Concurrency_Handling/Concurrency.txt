@@ -1,0 +1,19 @@
+Question
+    Scenario: You are developing a Node.js application where users can book events. The event booking system should prevent double bookings for the same event.
+    Requirements:
+    Describe how you would handle concurrent booking requests to ensure that an event cannot be booked more than once at the same time.
+    Suggest a strategy for implementing this in both the application code and the database schema.
+
+Solution
+
+Handling Concurrent Booking Requests: To prevent double bookings, you can use database-level locking and transactional handling.
+
+    In the application code: Use optimistic locking by checking the availability of an event before booking. Implement this with a transaction:
+        Begin a transaction.
+        Check the availability of the event (e.g., number of available seats).
+        If available, proceed with the booking and commit the transaction.
+        If unavailable, roll back.
+    In the database schema:
+
+        Use unique constraints on the combination of user_id and event_id in the bookings table to prevent duplicate bookings.
+        If using SQL, employ FOR UPDATE locking when reading the event availability during a transaction to ensure concurrent reads and writes are managed.

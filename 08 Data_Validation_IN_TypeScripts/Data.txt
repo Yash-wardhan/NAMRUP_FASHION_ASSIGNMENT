@@ -1,0 +1,43 @@
+Question
+    Scenario: You have the following TypeScript function that processes user input:
+
+    How would you enhance the UserInput interface to include validation rules (e.g., email format)?
+    Describe a strategy for validating user input in a TypeScript application.
+
+Solution
+
+
+Code
+
+interface UserInput {
+  name: string;
+  email: string;
+}
+
+function validateUserInput(input: UserInput): string[] {
+  const errors: string[] = [];
+
+  // Name validation (example: must not be empty)
+  if (!input.name || input.name.trim().length === 0) {
+    errors.push('Name is required.');
+  }
+
+  // Email validation (using regex to check email format)
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(input.email)) {
+    errors.push('Invalid email format.');
+  }
+
+  return errors;
+}
+
+function processUserInput(input: UserInput) {
+  const validationErrors = validateUserInput(input);
+
+  if (validationErrors.length > 0) {
+    console.log('Validation failed:', validationErrors);
+    return;
+  }
+
+  console.log('Input is valid:', input);
+}
